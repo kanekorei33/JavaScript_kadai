@@ -25,7 +25,7 @@ $(document).ready(function () {
       // ヒント：全体の個数はlengthメソッドを使って求めます。(lengthメソッド: 文字列の長さや配列の要素数などを取得するメソッド)
     };
     // 平均点数を取得し、取得した平均点数から「A、B、C、D」にランク分けするロジックを記述する。
-    function get_achievement() {
+    function get_achievement(score) {
       // 変数「averageIndicate」に
       // 平均点数をHTML上のid="average_indicate"から取得して代入します。
       let averageIndicate = $("#average_indicate").text();
@@ -46,7 +46,7 @@ $(document).ready(function () {
       // もし「averageIndicate」がそれ以外なら"D"を返します。
     };
     // 各教科の点数を取得し、取得した点数から「合格、不合格」の判断を下すロジックを作ります。
-    function get_pass_or_failure() {
+    function get_pass_or_failure(score) {
       let subject_points = [Number($('#national_language').val()),
       Number($('#english').val()),
       Number($('#mathematics').val()),
@@ -57,7 +57,7 @@ $(document).ready(function () {
       let number = subject_points.length;
       // 変数「judge」に"合格"を代入しておきます。
       let judge = "合格";
-      for(let i = 0;i<number;i++)//57のnumber
+      for(let i = 0;i<number;i++)//列57のnumber
       if (subject_points[i]<60){//上のi
          judge="不合格"
          break;}
@@ -90,8 +90,11 @@ $(document).ready(function () {
     // 「最終ジャッジ」(id="btn-declaration")ボタンが押された際、「function judgement()」の処理を実行させる。
     // ２回目以降に「最終ジャッジ」ボタンを押した際は、それまでに表示していたジャッジのHTML要素を削除して、新たなジャッジのHTML要素を追加する。
     // ヒント：removeメソッドについて調べてみましょう。
-    $('#btn-declaration').click(function () {
+    
+      $('#btn-declaration').click(function (){
+      $('#alert-indicate').remove();
+        judgement();
+      });
     });
-  });
-  
+
   // ここに書かれているJavaScriptの記述はあくまでヒントとして用意された雛形なので、書かれている記述に従わずに実装したいという場合は、自分の好きに実装して構いません。合格要件をすべて満たしていれば合格となります。
